@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import expect
 
-MENU_ITEMS = ["HÍREK", "DOKUMENTUMTÁR", "GALÉRIA", "KAPCSOLAT", "GYIK"]
+MENU_ITEMS = ["HIREK", "DOKUMENTUMTAR", "GALÉRIA", "KAPCSOLAT", "GYIK"]
 
 
 @pytest.mark.smoke
