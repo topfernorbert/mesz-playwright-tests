@@ -42,6 +42,6 @@ def page(browser_instance):
 @pytest.fixture(scope="function")
 def homepage(page):
     """Megnyitja a főoldalt és megvárja az Angular betöltését."""
-    page.goto(BASE_URL, wait_until="networkidle", timeout=30000)
+    page.goto(BASE_URL, wait_until="domcontentloaded", timeout=60000)
     wait_for_angular(page)
     return page
