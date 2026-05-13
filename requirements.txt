@@ -1,1 +1,8 @@
-
+pytest
+playwright
+pytest-playwright
+pytest-html
+axe-playwright-python
+python-dotenv
+pytest-xdist
+pytest-retry
