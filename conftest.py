@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import sync_playwright
 
-BASE_URL = "https://mesz.nive.hu"
+BASE_URL = "https://practicesoftwaretesting.com"
 
 
 @pytest.fixture(scope="session")
