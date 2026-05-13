@@ -1,15 +1,12 @@
 name: Playwright tesztek - mesz.nive.hu
-
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Kód letöltése
         uses: actions/checkout@v4
@@ -24,6 +21,10 @@ jobs:
 
       - name: Playwright böngészők telepítése
         run: playwright install chromium
+
+      - name: Oldal elérhetőség ellenőrzése
+        run: |
+          curl -v --max-time 30 https://mesz.nive.hu/ || echo "Az oldal nem érhető el!"
 
       - name: Tesztek futtatása
         run: pytest tests/ -v --html=reports/report.html
