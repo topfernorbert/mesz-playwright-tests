@@ -27,7 +27,7 @@ jobs:
 
       - name: Oldal elérhetőség ellenőrzése
         run: |
-          curl -v --max-time 30 https://mesz.nive.hu/ || echo "FIGYELEM: Az oldal nem érhető el!"
+          curl -v --max-time 30 https://practicesoftwaretesting.com/ || echo "FIGYELEM: Az oldal nem érhető el!"
 
       - name: Tesztek futtatása
-        run: pytest tests/test_minimal.py -v
+        run: pytest tests/ -v
