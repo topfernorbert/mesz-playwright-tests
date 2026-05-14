@@ -19,4 +19,3 @@ def test_login_button(page):
     expect(login_button).to_be_visible()
     login_button.click()
     expect(page).to_have_url("https://practicesoftwaretesting.com/auth/login")
-
