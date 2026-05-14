@@ -1,25 +1,21 @@
 def test_oldal_betolt(page):
-    """Az oldal betölt és a title helyes."""
-    page.goto(
-        "https://mesz.nive.hu",
-        wait_until="domcontentloaded",
-        timeout=60000
-    )
-    assert "Mérés" in page.title()
+    """Az oldal betölt."""
+    page.goto("https://practicesoftwaretesting.com",
+              wait_until="domcontentloaded",
+              timeout=60000)
+
+    assert "Practice" in page.title()
 
 
-def test_hirek_link(page):
-    """A Hírek link látható és kattintható."""
-    page.goto(
-        "https://mesz.nive.hu",
-        wait_until="domcontentloaded",
-        timeout=60000
-    )
+def test_signin_link(page):
+    """A Sign in link látható és kattintható."""
+    page.goto("https://practicesoftwaretesting.com",
+              wait_until="domcontentloaded",
+              timeout=60000)
 
-    # DOM alapján: <a class="nav-link" href="/hirek">Hírek</a>
-    hirek_link = page.locator("a.nav-link[href='/hirek']")
-    assert hirek_link.is_visible()
+    # DOM alapján: data-test="nav-sign-in"
+    signin_link = page.locator("[data-test='nav-sign-in']")
+    assert signin_link.is_visible()
 
-    hirek_link.click()
-    page.wait_for_url("**/hirek**", timeout=30000)
-    assert "hirek" in page.url
+    signin_link.click()
+    assert "/auth/login" in page.url
