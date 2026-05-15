@@ -1,0 +1,61 @@
+# ============================================
+# CONFTEST KIEGÉSZÍTŐK - REFERENCIA FÁJL
+# Nem fut le automatikusan, csak referencia!
+# ============================================
+
+# 1. MOBIL FIXTURE - 100% copy-paste
+@pytest.fixture(scope="function")
+def mobile_page(browser_instance):
+    """375px széles mobil viewport."""
+    context = browser_instance.new_context(
+        viewport={"width": 375, "height": 812},
+        user_agent="Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X)"
+    )
+    page = context.new_page()
+    yield page
+    context.close()
+
+
+# 2. CROSS BROWSER FIXTURE - 100% copy-paste
+@pytest.fixture(params=["chromium", "firefox"])
+def cross_browser_page(request):
+    """Ugyanaz a teszt több böngészőn fut le."""
+    with sync_playwright() as p:
+        browser = getattr(p, request.param).launch(headless=True)
+        page = browser.new_page()
+        yield page
+        browser.close()
+
+
+# 3. SCREENSHOT HIBA ESETÉN - 100% copy-paste
+@pytest.hookimpl(tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    """Hiba esetén automatikusan screenshot készül."""
+    if call.excinfo:
+        page = item.funcargs.get("page")
+        if page:
+            page.screenshot(
+                path=f"screenshots/{item.name}.png"
+            )
+
+
+# 4. BEJELENTKEZÉS FIXTURE - SABLON, át kell írni!
+@pytest.fixture(scope="function")
+def logged_in_page(page):
+    """Bejelentkezett állapotú oldal - SELECTOROKAT ÁT KELL ÍRNI!"""
+    page.goto("URL_IDE")
+    page.locator("[data-test='email']").fill("EMAIL_IDE")
+    page.locator("[data-test='password']").fill("JELSZO_IDE")
+    page.locator("[data-test='login-submit']").click()
+    return page
+
+
+# 5. KONFIGURÁCIÓ FIXTURE - SABLON, át kell írni!
+@pytest.fixture(scope="session")
+def config():
+    """Központi konfiguráció - ÉRTÉKEKET ÁT KELL ÍRNI!"""
+    return {
+        "base_url": "URL_IDE",
+        "email": "EMAIL_IDE",
+        "jelszo": "JELSZO_IDE"
+    }
