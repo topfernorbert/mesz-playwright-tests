@@ -21,3 +21,6 @@ def test_tobb_gomb(page):
     message.fill("Ez egy teszt üzenet, amelyet az automatikus teszt küld.")
     send_button = page.locator('[data-test="contact-submit"]')
     send_button.click()
+    success = page.locator("[role='alert']")
+    expect(success).to_be_visible()
+    expect(success).to_contain_text("Thanks for your message")
