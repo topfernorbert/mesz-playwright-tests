@@ -18,6 +18,6 @@ def test_tobb_gomb(page):
     subject = page.locator("[data-test='subject']")
     subject.select_option("webmaster")
     message = page.locator('[data-test="message"]')
-    message.fill("Ez egy teszt üzenet.")
+    message.fill("Ez egy teszt üzenet, amelyet az automatikus teszt küld.")
     send_button = page.locator('[data-test="contact-submit"]')
     send_button.click()
